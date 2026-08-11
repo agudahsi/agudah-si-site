@@ -1,0 +1,412 @@
+/* ==========================================================================
+   Agudas Yisroel of Staten Island — agudah.si
+   Palette: Jerusalem limestone ground, tekhelet blue-violet, oxidised brass
+   Type:    Frank Ruhl Libre (display, Hebrew+Latin) / Archivo (body, data)
+   ========================================================================== */
+
+:root {
+  --stone:      #e9e2d6;
+  --stone-deep: #ddd3c1;
+  --parchment:  #f6f2ea;
+  --tekhelet:   #232f6b;
+  --tekhelet-2: #3d4d99;
+  --brass:      #97742a;
+  --ink:        #17150f;
+  --muted:      #6b6455;
+  --rule:       rgba(23, 21, 15, 0.16);
+  --rule-soft:  rgba(23, 21, 15, 0.08);
+
+  --display: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+  --body:    "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --measure: 66ch;
+  --shell:   1140px;
+  --gut:     clamp(1.25rem, 4vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--stone);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle limestone tooth, drawn not photographed */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(151,116,42,0.055), transparent 42%),
+    radial-gradient(circle at 88% 72%, rgba(35,47,107,0.05), transparent 46%);
+}
+
+body > * { position: relative; z-index: 1; }
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.008em;
+  margin: 0 0 0.5em;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2.3rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.35rem); }
+h3 { font-size: 1.2rem; font-weight: 700; }
+
+p { margin: 0 0 1.15em; max-width: var(--measure); }
+a { color: var(--tekhelet); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--brass); }
+
+:focus-visible {
+  outline: 2.5px solid var(--tekhelet-2);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.shell { width: 100%; max-width: var(--shell); margin: 0 auto; padding-inline: var(--gut); }
+
+/* Eyebrow label — used only where it names a real category */
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 0.85rem;
+  display: block;
+}
+
+.hebrew {
+  font-family: var(--display);
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------- skip + masthead */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--tekhelet);
+  color: var(--parchment);
+  padding: 0.7rem 1.1rem;
+  z-index: 99;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: rgba(246, 242, 234, 0.72);
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+.masthead__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.wordmark { text-decoration: none; color: inherit; display: block; line-height: 1.1; }
+.wordmark span { display: block; }
+.wordmark__he { font-family: var(--display); font-size: 0.95rem; color: var(--brass); direction: rtl; text-align: left; unicode-bidi: isolate; margin-bottom: 0.05rem; }
+.wordmark__en {
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.wordmark__sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nav { display: flex; gap: clamp(0.9rem, 2.4vw, 1.9rem); flex-wrap: wrap; }
+.nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+.nav a:hover { color: var(--tekhelet); border-bottom-color: var(--brass); }
+.nav a[aria-current="page"] { border-bottom-color: var(--tekhelet); color: var(--tekhelet); }
+
+/* ------------------------------------------------------------------- hero */
+
+.hero { padding-block: clamp(2.75rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem); }
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+@media (min-width: 920px) {
+  .hero__grid { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+.hero__lede { font-size: clamp(1.02rem, 1.6vw, 1.16rem); color: var(--muted); max-width: 46ch; }
+
+.hero h1 .accent { color: var(--tekhelet); display: block; }
+
+.hero__rule {
+  width: 72px;
+  height: 3px;
+  background: var(--brass);
+  margin: 0 0 1.5rem;
+}
+
+/* --------------------------------------------- SIGNATURE: the luach board */
+
+.luach {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.7) inset,
+    0 14px 34px -22px rgba(23,21,15,0.5);
+}
+
+.luach__head {
+  background: var(--tekhelet);
+  color: var(--parchment);
+  padding: 0.95rem 1.25rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.luach__title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--parchment);
+}
+
+.luach__he { font-family: var(--display); font-size: 1rem; color: #d8c48a; direction: rtl; }
+
+.luach__body { padding: 0.35rem 1.25rem 1.15rem; }
+
+.luach__section {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 700;
+  padding-top: 1.15rem;
+  padding-bottom: 0.35rem;
+}
+
+.luach table { width: 100%; border-collapse: collapse; }
+
+.luach td {
+  padding: 0.52rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: baseline;
+  font-size: 0.94rem;
+}
+
+.luach tr:last-child td { border-bottom: none; }
+
+.luach td:first-child { font-weight: 500; padding-right: 1rem; }
+
+.luach td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 600;
+  color: var(--tekhelet);
+  white-space: nowrap;
+}
+
+.luach__note {
+  padding: 0.9rem 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.79rem;
+  color: var(--muted);
+  background: rgba(221, 211, 193, 0.4);
+}
+.luach__note p { margin: 0; max-width: none; }
+
+/* ------------------------------------------------------------------ bands */
+
+.band { padding-block: clamp(2.75rem, 6vw, 4.5rem); border-top: 1px solid var(--rule); }
+.band--parchment { background: var(--parchment); }
+.band--deep { background: var(--tekhelet); color: var(--parchment); border-top: none; }
+.band--deep h2, .band--deep h3 { color: var(--parchment); }
+.band--deep a { color: #e2cf98; }
+.band--deep .eyebrow { color: #d8c48a; }
+
+.band__intro { max-width: 62ch; margin-bottom: 2.5rem; }
+
+/* ------------------------------------------------------------------- grid */
+
+.cards {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+}
+
+.card {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  padding: 1.6rem 1.5rem;
+}
+.band--parchment .card { background: var(--stone); }
+.card h3 { margin-bottom: 0.45rem; }
+.card p { font-size: 0.94rem; color: var(--muted); margin-bottom: 0; }
+
+/* Vertical-rule list — used for sequences of events in time */
+.stack { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--stone-deep); }
+.band--deep .stack { border-left-color: rgba(226, 207, 152, 0.35); }
+.stack li { padding: 0 0 1.6rem 1.5rem; position: relative; }
+.stack li:last-child { padding-bottom: 0; }
+.stack li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  background: var(--brass);
+  border-radius: 50%;
+}
+.stack strong { display: block; font-family: var(--display); font-size: 1.1rem; font-weight: 700; }
+.stack span { font-size: 0.9rem; color: var(--muted); }
+.band--deep .stack span { color: rgba(246, 242, 234, 0.72); }
+
+/* -------------------------------------------------------------- schedules */
+
+.sched { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; }
+.sched caption {
+  text-align: left;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding-bottom: 0.6rem;
+}
+.sched th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  padding: 0.5rem 0.9rem 0.5rem 0;
+  border-bottom: 2px solid var(--rule);
+}
+.sched th:last-child, .sched td:last-child { text-align: right; padding-right: 0; }
+.sched td {
+  padding: 0.65rem 0.9rem 0.65rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 0.95rem;
+}
+.sched td:last-child {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--tekhelet);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ misc */
+
+.prose { max-width: var(--measure); }
+.prose h2 { margin-top: 2.5rem; }
+
+.pagehead { padding-block: clamp(2.5rem, 6vw, 4rem) 0; }
+.pagehead h1 { font-size: clamp(2rem, 5vw, 3.1rem); margin-bottom: 0.35rem; }
+.pagehead p { color: var(--muted); font-size: 1.05rem; }
+
+.btn {
+  display: inline-block;
+  background: var(--tekhelet);
+  color: var(--parchment);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--tekhelet);
+  transition: background 150ms ease, color 150ms ease;
+}
+.btn:hover { background: transparent; color: var(--tekhelet); }
+.band--deep .btn { background: #e2cf98; border-color: #e2cf98; color: var(--tekhelet); }
+.band--deep .btn:hover { background: transparent; color: #e2cf98; }
+
+.dl { margin: 0; }
+.dl div { padding: 0.9rem 0; border-bottom: 1px solid var(--rule-soft); }
+.dl dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.dl dd { margin: 0; font-size: 1.02rem; }
+
+/* ----------------------------------------------------------------- footer */
+
+.colophon {
+  background: var(--ink);
+  color: rgba(246, 242, 234, 0.78);
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: 0.9rem;
+}
+.colophon a { color: #e2cf98; }
+.colophon h3 { color: var(--parchment); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--body); font-weight: 700; margin-bottom: 0.7rem; }
+.colophon__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  margin-bottom: 2.5rem;
+}
+.colophon p { margin-bottom: 0.5rem; max-width: none; }
+
+/* The verification statement Google's reviewer needs to find */
+.affiliation {
+  border-top: 1px solid rgba(246, 242, 234, 0.18);
+  padding-top: 1.5rem;
+  font-size: 0.83rem;
+  line-height: 1.7;
+  color: rgba(246, 242, 234, 0.62);
+}
+.affiliation strong { color: var(--parchment); font-weight: 600; }
